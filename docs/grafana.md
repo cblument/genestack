@@ -2,16 +2,23 @@
 
 ---
 
+## Basic install
+
 !!! note
-    This deployment makes a few assumption:
+    This is a very basic deployment of grafana
+    * database will be a sqlite3 database on the grafana pod that will be destroyed if the pod is destroyed
+    * no ingress so kubernetes port forwarding will need to be utilized
 
-    * assumes you are using OAuth using Azure
-    * assumes you are using tls/ssl
-    * assumes you are using ingress
 
-    If this does not apply to your deployment adjust the overrides.yaml file and skip over any unneeded sections here
+!!! example "Run the grafana deployment Script `bin/install-grafana.sh`"
 
-## Create secret client file
+    ``` shell
+    --8<-- "bin/install-grafana.sh"
+    ```
+
+## Customized install
+
+### Create secret client file
 
 In order to avoid putting sensative information on the cli, it is recommended to create and use a secret file instead.
 
@@ -38,7 +45,7 @@ type: opaque
 
 ---
 
-## Create your ssl files
+### Create your ssl files
 
 If you are configuring grafana to use tls/ssl, you should create a file for your certificate and a file for your key.  After the deployment, these files can be deleted if desired since the cert and key will now be in a Kubernetes secret.
 
@@ -108,7 +115,7 @@ These example files are located in `/etc/genestack/kustomize/grafana/base`
 
 ---
 
-## Update datasources.yaml
+### Update datasources.yaml
 
 The datasource.yaml file is located at `/etc/genestack/kustomize/grafana/base`
 
